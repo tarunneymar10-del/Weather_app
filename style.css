@@ -1,0 +1,62 @@
+:root {
+  --text: #fff;
+  --panel: rgba(255, 255, 255, .16);
+  --panel-strong: rgba(255, 255, 255, .26);
+  --sky-top: #3b8ed8;
+  --sky-bottom: #a9d6f5;
+}
+body[data-sky="clear-day"]   { --sky-top: #2f7fd0; --sky-bottom: #aedcf7; }
+body[data-sky="clear-night"] { --sky-top: #0b1330; --sky-bottom: #35467a; }
+body[data-sky="cloudy"]      { --sky-top: #5d6b7a; --sky-bottom: #aab6c1; }
+body[data-sky="rain"]        { --sky-top: #28384a; --sky-bottom: #5f7a91; }
+body[data-sky="snow"]        { --sky-top: #7e92a8; --sky-bottom: #e3ecf4; }
+body[data-sky="storm"]       { --sky-top: #1c1f33; --sky-bottom: #4b4f73; }
+body[data-sky="fog"]         { --sky-top: #7b868f; --sky-bottom: #c9cfd3; }
+
+* { box-sizing: border-box; }
+html { min-height: 100%; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(180deg, var(--sky-top), var(--sky-bottom)) fixed;
+  transition: background 0.6s;
+}
+main { max-width: 520px; margin: 0 auto; padding: 24px 16px 48px; }
+
+#search { display: flex; gap: 8px; flex-wrap: wrap; }
+input, button {
+  font: inherit; color: inherit; border: 0; border-radius: 12px;
+  padding: 12px 14px; background: var(--panel);
+}
+input { flex: 1 1 200px; min-width: 0; }
+input::placeholder { color: rgba(255,255,255,.75); }
+button { cursor: pointer; }
+button:hover { background: var(--panel-strong); }
+:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+
+#status { margin: 16px 2px; min-height: 1.4em; }
+#status.error { font-weight: 600; }
+
+#current { text-align: center; padding: 16px 0 8px; }
+#place { margin: 0; font-size: 1.5rem; font-weight: 600; }
+#condition { margin: 4px 0 0; font-size: 1.1rem; opacity: .9; }
+#temp { margin: 0; font-size: 6.5rem; font-weight: 200; line-height: 1.1; letter-spacing: -0.04em; }
+#details { display: flex; justify-content: center; gap: 24px; margin: 8px 0 20px; }
+#details div { text-align: center; }
+#details dt { font-size: .85rem; opacity: .8; }
+#details dd { margin: 2px 0 0; font-weight: 600; }
+
+h2 { font-size: 1rem; font-weight: 600; margin: 24px 2px 8px; }
+#forecast { list-style: none; margin: 0; padding: 0; background: var(--panel); border-radius: 16px; }
+#forecast li {
+  display: grid; grid-template-columns: 5rem 1fr auto; gap: 12px; align-items: center;
+  padding: 12px 16px;
+}
+#forecast li + li { border-top: 1px solid rgba(255,255,255,.2); }
+#forecast .low { opacity: .7; margin-right: 10px; }
+#forecast .hi { font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) { body { transition: none; } }
+@media (max-width: 380px) { #temp { font-size: 5rem; } }
